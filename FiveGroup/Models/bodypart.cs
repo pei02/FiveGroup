@@ -17,13 +17,13 @@ namespace FiveGroup.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public bodypart()
         {
-            this.symptom = new HashSet<symptom>();
+            this.dep_sym_ref = new HashSet<dep_sym_ref>();
         }
     
         public string part_id { get; set; }
         public string part_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<symptom> symptom { get; set; }
+        public virtual ICollection<dep_sym_ref> dep_sym_ref { get; set; }
     }
 }

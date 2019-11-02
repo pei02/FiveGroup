@@ -29,6 +29,7 @@ namespace FiveGroup.Models
         public virtual DbSet<announcement> announcement { get; set; }
         public virtual DbSet<bodypart> bodypart { get; set; }
         public virtual DbSet<city> city { get; set; }
+        public virtual DbSet<dep_sym_ref> dep_sym_ref { get; set; }
         public virtual DbSet<department> department { get; set; }
         public virtual DbSet<district> district { get; set; }
         public virtual DbSet<doctor> doctor { get; set; }
@@ -36,17 +37,7 @@ namespace FiveGroup.Models
         public virtual DbSet<feedback_class> feedback_class { get; set; }
         public virtual DbSet<hospital> hospital { get; set; }
         public virtual DbSet<ingrediant> ingrediant { get; set; }
-        public virtual DbSet<no_alarm> no_alarm { get; set; }
-        public virtual DbSet<no_dur_cont> no_dur_cont { get; set; }
-        public virtual DbSet<no_dur_enddate> no_dur_enddate { get; set; }
-        public virtual DbSet<no_freq_active_pause> no_freq_active_pause { get; set; }
-        public virtual DbSet<no_freq_day> no_freq_day { get; set; }
-        public virtual DbSet<no_freq_hour> no_freq_hour { get; set; }
-        public virtual DbSet<no_freq_time> no_freq_time { get; set; }
-        public virtual DbSet<no_freq_week> no_freq_week { get; set; }
-        public virtual DbSet<notification> notification { get; set; }
         public virtual DbSet<schedule> schedule { get; set; }
         public virtual DbSet<symptom> symptom { get; set; }
-        public virtual DbSet<dep_sym_ref> dep_sym_ref { get; set; }
     }
 }

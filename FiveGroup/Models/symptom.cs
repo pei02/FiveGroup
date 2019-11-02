@@ -22,9 +22,7 @@ namespace FiveGroup.Models
     
         public string sym_id { get; set; }
         public string sym_name { get; set; }
-        public string part_id { get; set; }
     
-        public virtual bodypart bodypart { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<dep_sym_ref> dep_sym_ref { get; set; }
     }
