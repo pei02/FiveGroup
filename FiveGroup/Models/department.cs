@@ -17,16 +17,16 @@ namespace FiveGroup.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public department()
         {
-            this.dep_sym_ref = new HashSet<dep_sym_ref>();
             this.schedule = new HashSet<schedule>();
+            this.dep_sym_ref = new HashSet<dep_sym_ref>();
         }
     
         public string dep_id { get; set; }
         public string dep_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dep_sym_ref> dep_sym_ref { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<schedule> schedule { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<dep_sym_ref> dep_sym_ref { get; set; }
     }
 }

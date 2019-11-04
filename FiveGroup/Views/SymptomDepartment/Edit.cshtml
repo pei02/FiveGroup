@@ -1,0 +1,95 @@
+﻿@model FiveGroup.ViewModel.SymptomDepartment
+
+@{
+    ViewBag.Title = "編輯症狀科別對應資料";
+}
+
+    <h2>編輯症狀科別對應資料</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.depSymRef.dep_sym_sn, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="form-control" readonly="readonly" type="number" value="@Model.depSymRef.dep_sym_sn" id="dep_sym_sn" name="dep_sym_sn"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">身體部位</label>
+            <div class="col-md-10">
+                <select id="part_id" name="part_id">
+                    @foreach (var a in Model.bodypartList)
+                    {
+                        if (@Model.depSymRef.part_id == @a.part_id)
+                        {
+                            <option value="@a.part_id" selected>@a.part_name</option>
+                        }
+                        else
+                        {
+                            <option value="@a.part_id">@a.part_name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">症狀</label>
+            <div class="col-md-10">
+                <select id="sym_id" name="sym_id">
+                    @foreach (var a in Model.symptomList)
+                    {
+                        if (@Model.depSymRef.sym_id == @a.sym_id)
+                        {
+                            <option value="@a.sym_id" selected>@a.sym_name</option>
+                        }
+                        else
+                        {
+                            <option value="@a.sym_id">@a.sym_name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">科別</label>
+            <div class="col-md-10">
+                <select id="dep_id" name="dep_id">
+                    @foreach (var a in Model.departmentList)
+                    {
+                        if (@Model.depSymRef.dep_id == @a.dep_id)
+                        {
+                            <option value="@a.dep_id" selected>@a.dep_name</option>
+                        }
+                        else
+                        {
+                            <option value="@a.dep_id">@a.dep_name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="儲存" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("返回列表", "Index", new { @cityname= ViewBag.citynameID})
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

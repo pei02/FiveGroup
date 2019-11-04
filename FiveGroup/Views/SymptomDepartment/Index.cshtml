@@ -1,0 +1,126 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model FiveGroup.ViewModel.SymptomDepartment
+
+@{
+    ViewBag.Title = "症狀科別對應";
+}
+
+<link href="~/Content/SymptomDepartment.css" rel="stylesheet" />
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<div class="shadow p-3 mb-5 bg-white rounded">
+    <h2 class="text-center"><strong>該看哪科</strong></h2>
+</div>
+
+<div class="row">
+    <form class="form-row" method="post">
+        <div class="align-self-md-center mb-4 ml-2">
+            <select id="pId" name="pId">
+                <option value="">全部</option>
+                @foreach (var a in Model.bodypartList)
+                {
+                    if (@ViewBag.pId == @a.part_id)
+                    {
+                        <option value="@a.part_id" selected>@a.part_name</option>
+                    }
+                    else
+                    {
+                        <option value="@a.part_id">@a.part_name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="align-self-md-center mb-4 ml-2">
+            <select id="sId" name="sId">
+                <option value="">全部</option>
+                @foreach (var a in Model.symptomList)
+                {
+                    if (@ViewBag.sId == @a.sym_id)
+                    {
+                        <option value="@a.sym_id" selected>@a.sym_name</option>
+                    }
+                    else
+                    {
+                        <option value="@a.sym_id">@a.sym_name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="align-self-md-center mb-4 ml-2">
+            <select id="dId" name="dId">
+                <option value="">全部</option>
+                @foreach (var a in Model.departmentList)
+                {
+                    if (@ViewBag.dId == @a.dep_id)
+                    {
+                        <option value="@a.dep_id" selected>@a.dep_name</option>
+                    }
+                    else
+                    {
+                        <option value="@a.dep_id">@a.dep_name</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="align-self-md-center mb-4 ml-2">
+            <input type="submit" value="查詢" class="btn btn-primary" />
+        </div>
+    </form>
+    <div class="col-md-auto ml-auto">
+        @Html.ActionLink("新增資料", "Create", new { }, new { @class = "btn btn-info" })
+    </div>
+</div>
+
+<table class="table">
+    <tr class="row text-center">
+        <th class="col-2">
+            流水號
+        </th>
+        <th class="col-3">
+            身體部位
+        </th>
+        <th class="col-3">
+            症狀
+        </th>
+        <th class="col-3">
+            科別
+        </th>
+        <th class="col-1"></th>
+    </tr>
+
+    @foreach (var item in Model.depSymRefPagedList)
+    {
+        <tr class="row text-center">
+            <td class="col-2">
+                @Html.DisplayFor(modelItem => item.dep_sym_sn)
+            </td>
+            <td class="col-3">
+                @Html.DisplayFor(modelItem => item.bodypart.part_name)
+            </td>
+            <td class="col-3">
+                @Html.DisplayFor(modelItem => item.symptom.sym_name)
+            </td>
+            <td class="col-3">
+                @Html.DisplayFor(modelItem => item.department.dep_name)
+            </td>
+            <td class="col-1">
+                @Html.ActionLink("編輯", "Edit", "SymptomDepartment", new { sn = item.dep_sym_sn, pId = item.part_id, sId = item.sym_id, dId = item.dep_id }, new { @class="btn btn-info" })
+                @Html.ActionLink("刪除", "Delete", "SymptomDepartment", new { sn = item.dep_sym_sn, pId = item.part_id, sId = item.sym_id, dId = item.dep_id }, new { @class = "btn btn-danger" , onclick="return confirm('您確定要刪除嗎？')"})
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model.depSymRefPagedList, page => Url.Action("Index", new { page }))
+</div>
+
+
+
+
+
+
+
+
