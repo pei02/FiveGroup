@@ -29,7 +29,6 @@ namespace FiveGroup.Models
         public virtual DbSet<announcement> announcement { get; set; }
         public virtual DbSet<bodypart> bodypart { get; set; }
         public virtual DbSet<city> city { get; set; }
-        public virtual DbSet<dep_sym_ref> dep_sym_ref { get; set; }
         public virtual DbSet<department> department { get; set; }
         public virtual DbSet<district> district { get; set; }
         public virtual DbSet<doctor> doctor { get; set; }
@@ -39,5 +38,6 @@ namespace FiveGroup.Models
         public virtual DbSet<ingrediant> ingrediant { get; set; }
         public virtual DbSet<schedule> schedule { get; set; }
         public virtual DbSet<symptom> symptom { get; set; }
+        public virtual DbSet<dep_sym_ref> dep_sym_ref { get; set; }
     }
 }

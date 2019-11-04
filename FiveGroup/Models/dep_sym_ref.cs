@@ -15,9 +15,9 @@ namespace FiveGroup.Models
     public partial class dep_sym_ref
     {
         public long dep_sym_sn { get; set; }
-        public string dep_id { get; set; }
         public string part_id { get; set; }
         public string sym_id { get; set; }
+        public string dep_id { get; set; }
     
         public virtual bodypart bodypart { get; set; }
         public virtual department department { get; set; }
