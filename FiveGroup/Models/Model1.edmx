@@ -39,14 +39,11 @@
         <EntityType Name="dep_sym_ref">
           <Key>
             <PropertyRef Name="dep_sym_sn" />
-            <PropertyRef Name="dep_id" />
-            <PropertyRef Name="part_id" />
-            <PropertyRef Name="sym_id" />
           </Key>
           <Property Name="dep_sym_sn" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="dep_id" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="part_id" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="sym_id" Type="char" MaxLength="5" Nullable="false" />
+          <Property Name="dep_id" Type="char" MaxLength="5" Nullable="false" />
         </EntityType>
         <EntityType Name="department">
           <Key>
@@ -320,7 +317,6 @@
           <EntitySet Name="announcement" EntityType="Project2Model.announcement" />
           <EntitySet Name="bodypart" EntityType="Project2Model.bodypart" />
           <EntitySet Name="city" EntityType="Project2Model.city" />
-          <EntitySet Name="dep_sym_ref" EntityType="Project2Model.dep_sym_ref" />
           <EntitySet Name="department" EntityType="Project2Model.department" />
           <EntitySet Name="district" EntityType="Project2Model.district" />
           <EntitySet Name="doctor" EntityType="Project2Model.doctor" />
@@ -330,10 +326,6 @@
           <EntitySet Name="ingrediant" EntityType="Project2Model.ingrediant" />
           <EntitySet Name="schedule" EntityType="Project2Model.schedule" />
           <EntitySet Name="symptom" EntityType="Project2Model.symptom" />
-          <AssociationSet Name="FK__dep_sym_r__part___5F7E2DAC" Association="Project2Model.FK__dep_sym_r__part___5F7E2DAC">
-            <End Role="bodypart" EntitySet="bodypart" />
-            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
-          </AssociationSet>
           <AssociationSet Name="FK__district__c_id__282DF8C2" Association="Project2Model.FK__district__c_id__282DF8C2">
             <End Role="city" EntitySet="city" />
             <End Role="district" EntitySet="district" />
@@ -341,14 +333,6 @@
           <AssociationSet Name="FK__hospital__c_id__2739D489" Association="Project2Model.FK__hospital__c_id__2739D489">
             <End Role="city" EntitySet="city" />
             <End Role="hospital" EntitySet="hospital" />
-          </AssociationSet>
-          <AssociationSet Name="FK__dep_sym_r__dep_i__5E8A0973" Association="Project2Model.FK__dep_sym_r__dep_i__5E8A0973">
-            <End Role="department" EntitySet="department" />
-            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
-          </AssociationSet>
-          <AssociationSet Name="FK__dep_sym_r__sym_i__607251E5" Association="Project2Model.FK__dep_sym_r__sym_i__607251E5">
-            <End Role="symptom" EntitySet="symptom" />
-            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
           </AssociationSet>
           <AssociationSet Name="FK__schedule__dep_id__3E52440B" Association="Project2Model.FK__schedule__dep_id__3E52440B">
             <End Role="department" EntitySet="department" />
@@ -370,7 +354,20 @@
             <End Role="hospital" EntitySet="hospital" />
             <End Role="schedule" EntitySet="schedule" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="dep_sym_ref" EntityType="Project2Model.dep_sym_ref" />
+          <AssociationSet Name="FK__dep_sym_r__part___5F7E2DAC" Association="Project2Model.FK__dep_sym_r__part___5F7E2DAC">
+            <End Role="bodypart" EntitySet="bodypart" />
+            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dep_sym_r__dep_i__5E8A0973" Association="Project2Model.FK__dep_sym_r__dep_i__5E8A0973">
+            <End Role="department" EntitySet="department" />
+            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
+          </AssociationSet>
+          <AssociationSet Name="FK__dep_sym_r__sym_i__607251E5" Association="Project2Model.FK__dep_sym_r__sym_i__607251E5">
+            <End Role="symptom" EntitySet="symptom" />
+            <End Role="dep_sym_ref" EntitySet="dep_sym_ref" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="administrator">
           <Key>
             <PropertyRef Name="admin_id" />
@@ -405,29 +402,14 @@
           <NavigationProperty Name="district" Relationship="Project2Model.FK__district__c_id__282DF8C2" FromRole="city" ToRole="district" />
           <NavigationProperty Name="hospital" Relationship="Project2Model.FK__hospital__c_id__2739D489" FromRole="city" ToRole="hospital" />
         </EntityType>
-        <EntityType Name="dep_sym_ref">
-          <Key>
-            <PropertyRef Name="dep_sym_sn" />
-            <PropertyRef Name="dep_id" />
-            <PropertyRef Name="part_id" />
-            <PropertyRef Name="sym_id" />
-          </Key>
-          <Property Name="dep_sym_sn" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="dep_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="part_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <Property Name="sym_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="bodypart" Relationship="Project2Model.FK__dep_sym_r__part___5F7E2DAC" FromRole="dep_sym_ref" ToRole="bodypart" />
-          <NavigationProperty Name="department" Relationship="Project2Model.FK__dep_sym_r__dep_i__5E8A0973" FromRole="dep_sym_ref" ToRole="department" />
-          <NavigationProperty Name="symptom" Relationship="Project2Model.FK__dep_sym_r__sym_i__607251E5" FromRole="dep_sym_ref" ToRole="symptom" />
-        </EntityType>
         <EntityType Name="department">
           <Key>
             <PropertyRef Name="dep_id" />
           </Key>
           <Property Name="dep_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="dep_name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="dep_sym_ref" Relationship="Project2Model.FK__dep_sym_r__dep_i__5E8A0973" FromRole="department" ToRole="dep_sym_ref" />
           <NavigationProperty Name="schedule" Relationship="Project2Model.FK__schedule__dep_id__3E52440B" FromRole="department" ToRole="schedule" />
+          <NavigationProperty Name="dep_sym_ref" Relationship="Project2Model.FK__dep_sym_r__dep_i__5E8A0973" FromRole="department" ToRole="dep_sym_ref" />
         </EntityType>
         <EntityType Name="district">
           <Key>
@@ -521,18 +503,6 @@
           <Property Name="sym_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="dep_sym_ref" Relationship="Project2Model.FK__dep_sym_r__sym_i__607251E5" FromRole="symptom" ToRole="dep_sym_ref" />
         </EntityType>
-        <Association Name="FK__dep_sym_r__part___5F7E2DAC">
-          <End Type="Project2Model.bodypart" Role="bodypart" Multiplicity="1" />
-          <End Type="Project2Model.dep_sym_ref" Role="dep_sym_ref" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bodypart">
-              <PropertyRef Name="part_id" />
-            </Principal>
-            <Dependent Role="dep_sym_ref">
-              <PropertyRef Name="part_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__district__c_id__282DF8C2">
           <End Type="Project2Model.city" Role="city" Multiplicity="1" />
           <End Type="Project2Model.district" Role="district" Multiplicity="*" />
@@ -554,30 +524,6 @@
             </Principal>
             <Dependent Role="hospital">
               <PropertyRef Name="c_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__dep_sym_r__dep_i__5E8A0973">
-          <End Type="Project2Model.department" Role="department" Multiplicity="1" />
-          <End Type="Project2Model.dep_sym_ref" Role="dep_sym_ref" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="department">
-              <PropertyRef Name="dep_id" />
-            </Principal>
-            <Dependent Role="dep_sym_ref">
-              <PropertyRef Name="dep_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__dep_sym_r__sym_i__607251E5">
-          <End Type="Project2Model.symptom" Role="symptom" Multiplicity="1" />
-          <End Type="Project2Model.dep_sym_ref" Role="dep_sym_ref" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="symptom">
-              <PropertyRef Name="sym_id" />
-            </Principal>
-            <Dependent Role="dep_sym_ref">
-              <PropertyRef Name="sym_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -641,6 +587,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="dep_sym_ref">
+          <Key>
+            <PropertyRef Name="dep_sym_sn" />
+          </Key>
+          <Property Name="dep_sym_sn" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="part_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="sym_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="dep_id" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="bodypart" Relationship="Project2Model.FK__dep_sym_r__part___5F7E2DAC" FromRole="dep_sym_ref" ToRole="bodypart" />
+          <NavigationProperty Name="department" Relationship="Project2Model.FK__dep_sym_r__dep_i__5E8A0973" FromRole="dep_sym_ref" ToRole="department" />
+          <NavigationProperty Name="symptom" Relationship="Project2Model.FK__dep_sym_r__sym_i__607251E5" FromRole="dep_sym_ref" ToRole="symptom" />
+        </EntityType>
+        <Association Name="FK__dep_sym_r__part___5F7E2DAC">
+          <End Type="Project2Model.bodypart" Role="bodypart" Multiplicity="1" />
+          <End Type="Project2Model.dep_sym_ref" Role="dep_sym_ref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bodypart">
+              <PropertyRef Name="part_id" />
+            </Principal>
+            <Dependent Role="dep_sym_ref">
+              <PropertyRef Name="part_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dep_sym_r__dep_i__5E8A0973">
+          <End Type="Project2Model.department" Role="department" Multiplicity="1" />
+          <End Type="Project2Model.dep_sym_ref" Role="dep_sym_ref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="department">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="dep_sym_ref">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__dep_sym_r__sym_i__607251E5">
+          <End Type="Project2Model.symptom" Role="symptom" Multiplicity="1" />
+          <End Type="Project2Model.dep_sym_ref" Role="dep_sym_ref" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="symptom">
+              <PropertyRef Name="sym_id" />
+            </Principal>
+            <Dependent Role="dep_sym_ref">
+              <PropertyRef Name="sym_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -679,16 +673,6 @@
               <MappingFragment StoreEntitySet="city">
                 <ScalarProperty Name="city_name" ColumnName="city_name" />
                 <ScalarProperty Name="c_id" ColumnName="c_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dep_sym_ref">
-            <EntityTypeMapping TypeName="Project2Model.dep_sym_ref">
-              <MappingFragment StoreEntitySet="dep_sym_ref">
-                <ScalarProperty Name="sym_id" ColumnName="sym_id" />
-                <ScalarProperty Name="part_id" ColumnName="part_id" />
-                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
-                <ScalarProperty Name="dep_sym_sn" ColumnName="dep_sym_sn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -782,6 +766,16 @@
               <MappingFragment StoreEntitySet="symptom">
                 <ScalarProperty Name="sym_name" ColumnName="sym_name" />
                 <ScalarProperty Name="sym_id" ColumnName="sym_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dep_sym_ref">
+            <EntityTypeMapping TypeName="Project2Model.dep_sym_ref">
+              <MappingFragment StoreEntitySet="dep_sym_ref">
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="sym_id" ColumnName="sym_id" />
+                <ScalarProperty Name="part_id" ColumnName="part_id" />
+                <ScalarProperty Name="dep_sym_sn" ColumnName="dep_sym_sn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
