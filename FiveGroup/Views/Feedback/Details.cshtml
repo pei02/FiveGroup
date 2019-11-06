@@ -6,14 +6,6 @@
 
     <link href="~/Content/Comprehensive.css" rel="stylesheet" />
 
-    <nav aria-label="breadcrumb" class="mt-3">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">@Html.ActionLink("Home", "Index", "Home")</li>
-            <li class="breadcrumb-item"> @Html.ActionLink("問題回報", "Index", new { f_class = ViewBag.f_class })</li>
-            <li class="breadcrumb-item"><a href="#">詳細資料</a></li>
-        </ol>
-    </nav>
-
 <div class="container mt-3">
 
     @foreach (var item in Model.Feedbacks)

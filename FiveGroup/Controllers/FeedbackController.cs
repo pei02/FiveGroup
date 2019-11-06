@@ -15,13 +15,24 @@ namespace FiveGroup.Controllers
         // GET: Feedback
         public ActionResult Index(string f_class = "F0001")
         {
-            ViewBag.f_class = db.feedback_class.Where(m => m.f_class == f_class).FirstOrDefault().f_class;
+            string[] f_c = { "F0001", "F0002", "F0003", "F0004" };
+
+            ViewBag.f_c01 = fb_count(f_c[0]);
+            ViewBag.f_c02 = fb_count(f_c[1]);
+            ViewBag.f_c03 = fb_count(f_c[2]);
+            ViewBag.f_c04 = fb_count(f_c[3]);
+
+            var a = db.feedback_class.Where(m => m.f_class == f_class);
+
+            ViewBag.f_class = a.FirstOrDefault().f_class;
+            ViewBag.class_content = a.FirstOrDefault().class_content;
+
             FeedbackClass fb = new FeedbackClass()
             {
                 Feedbacks = db.feedback.Where(m => m.f_class == f_class).ToList(),
                 Feedback_Classes = db.feedback_class.ToList()
             };
-
+            
             return View(fb);
         }
 
@@ -98,6 +109,22 @@ namespace FiveGroup.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Index", new { f_class = f_class });
+        }
+
+        public int fb_count(string f_class) {
+
+            var f_c_num = from m in db.feedback
+                    where
+                      m.f_class == f_class &&
+                      m.f_checked == false
+                    select new
+                    {
+                        m.f_checked
+                    };
+
+            int f_c_count = f_c_num.Count();
+
+            return f_c_count;
         }
     }
 }
